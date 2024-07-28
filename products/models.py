@@ -2,7 +2,15 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    
+    def __str__(self):
+        return self.name
 
+    class Meta:
+        verbose_name_plural = "Categories"
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -14,8 +22,7 @@ class Product(models.Model):
     season = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='products')
 
     def __str__(self):
         return self.name
-
-# Create your models here.
