@@ -1,4 +1,4 @@
-# Proje Adı
+# Proje Adı: TIKLAGIY
 
 Bu proje, kullanıcılara vücut ölçülerine uygun kıyafet bulma ve satın alma süreçlerini kolaylaştırmak için geliştirilmiş kapsamlı bir platformdur. Kullanıcıların detaylı vücut ölçülerini kaydedip, bu ölçülere en uygun ürünleri bulmalarını sağlamak amacıyla tasarlanmıştır.
 
