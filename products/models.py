@@ -26,3 +26,27 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class ProductSize(models.Model):
+    SIZE_CHOICES = [
+        ('XS', 'Extra Small'),
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra Large'),
+        ('XXL', 'Double Extra Large'),
+    ]
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sizes')
+    size = models.CharField(max_length=3, choices=SIZE_CHOICES)
+    chest = models.FloatField(null=True, blank=True)
+    waist = models.FloatField(null=True, blank=True)
+    hips = models.FloatField(null=True, blank=True)
+    length = models.FloatField(null=True, blank=True)
+    stock = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        unique_together = ['product', 'size']
+
+    def __str__(self):
+        return f"{self.product.name} - {self.get_size_display()}"

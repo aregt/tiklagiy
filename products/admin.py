@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category
+from .models import Product, Category, ProductSize
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -11,3 +11,9 @@ class ProductAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent')
     search_fields = ('name',)
+
+@admin.register(ProductSize)
+class ProductSizeAdmin(admin.ModelAdmin):
+    list_display = ('product', 'size', 'stock')
+    list_filter = ('size',)
+    search_fields = ('product__name',)
