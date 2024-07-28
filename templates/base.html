@@ -1,37 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TıklaGiy{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        .messages {
+            list-style-type: none;
+            padding: 0;
+        }
+        .messages li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .messages .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
-      <nav>
-        <ul>
-          <li><a href="{% url 'home' %}">Ana Sayfa</a></li>
-          {% if user.is_authenticated %}
-            <li>Merhaba, {{ user.username }}</li>
-            <li><a href="{% url 'logout' %}">Çıkış Yap</a></li>
-          {% else %}
-            <li><a href="{% url 'login' %}">Giriş Yap</a></li>
-            <li><a href="{% url 'register' %}">Kayıt Ol</a></li>
-          {% endif %}
-        </ul>
-      </nav>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                {% if user.is_authenticated %}
+                    <li>Merhaba, {{ user.username }}</li>
+                    <li><a href="{% url 'logout' %}">Çıkış Yap</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Giriş Yap</a></li>
+                    <li><a href="{% url 'register' %}">Kayıt Ol</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </header>
     <main>
         {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
-
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
     <footer>
-        <!-- Footer içeriği -->
+        <p>&copy; 2024 TıklaGiy. Tüm hakları saklıdır.</p>
     </footer>
 </body>
 </html>

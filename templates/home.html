@@ -1,14 +1,46 @@
 {% extends 'base.html' %}
 
+{% block title %}Ana Sayfa - TıklaGiy{% endblock %}
+
 {% block content %}
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-  
-  <h1>TıklaGiy'e Hoş Geldiniz!</h1>
-  <!-- Diğer içerikler -->
+<h1>TıklaGiy'e Hoş Geldiniz!</h1>
+
+{% if user.is_authenticated %}
+    <p>Merhaba, {{ user.username }}! Bugün ne almak istersiniz?</p>
+{% else %}
+    <p>Kıyafet alışverişini kolaylaştıran platformumuza hoş geldiniz. <a href="{% url 'register' %}">Kayıt olun</a> veya <a href="{% url 'login' %}">giriş yapın</a> ve alışverişe başlayın!</p>
+{% endif %}
+
+<h2>Son Eklenen Ürünler</h2>
+<ul>
+    {% for product in latest_products %}
+        <li>
+            <a href="#">{{ product.name }}</a> - {{ product.price }} TL
+        </li>
+    {% empty %}
+        <li>Henüz ürün eklenmemiş.</li>
+    {% endfor %}
+</ul>
+
+<h2>Öne Çıkan Mağazalar</h2>
+<ul>
+    {% for store in featured_stores %}
+        <li>
+            <a href="#">{{ store.name }}</a>
+        </li>
+    {% empty %}
+        <li>Henüz mağaza eklenmemiş.</li>
+    {% endfor %}
+</ul>
+
+<h2>Hızlı Linkler</h2>
+<ul>
+    <li><a href="#">Tüm Ürünler</a></li>
+    <li><a href="#">Kategoriler</a></li>
+    <li><a href="#">Mağazalar</a></li>
+    {% if user.is_authenticated %}
+        <li><a href="#">Profilim</a></li>
+        <li><a href="#">Siparişlerim</a></li>
+    {% endif %}
+</ul>
 {% endblock %}
