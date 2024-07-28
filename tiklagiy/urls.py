@@ -7,7 +7,7 @@ from .views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('accounts/', include('accounts.urls')),  # Yeni eklenen satır
+    path('accounts/', include('accounts.urls')),
 ]
 
 if settings.DEBUG:

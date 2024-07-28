@@ -5,14 +5,25 @@
 </head>
 <body>
     <header>
-        <!-- Burada navigasyon menüsü olabilir -->
+      <nav>
+        <ul>
+          <li><a href="{% url 'home' %}">Ana Sayfa</a></li>
+          {% if user.is_authenticated %}
+            <li>Merhaba, {{ user.username }}</li>
+            <li><a href="{% url 'logout' %}">Çıkış Yap</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Giriş Yap</a></li>
+            <li><a href="{% url 'register' %}">Kayıt Ol</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </header>
     <main>
         {% block content %}
         {% endblock %}
     </main>
     <footer>
-        <!-- Burada footer içeriği olabilir -->
+        <!-- Footer içeriği -->
     </footer>
 </body>
 </html>
