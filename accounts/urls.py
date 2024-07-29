@@ -6,4 +6,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('verify-email/<str:token>/', views.verify_email, name='verify_email'),
 ]

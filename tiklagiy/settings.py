@@ -135,3 +135,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'simsekoglu@outlook.com'  # Outlook e-posta adresiniz
+EMAIL_HOST_PASSWORD = 'CemArd20101976'  # Outlook şifreniz
+DEFAULT_FROM_EMAIL = 'simsekoglu@outlook.com'  # Gönderen e-posta adresi

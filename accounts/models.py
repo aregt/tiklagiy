@@ -1,18 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 # Create your models here.
 
 class CustomUser(AbstractUser):
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    birth_date = models.DateField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    email = models.EmailField(unique=True)
+    email_verified = models.BooleanField(default=False)
+    email_verification_token = models.CharField(max_length=100, blank=True)
 
-    def __str__(self):
-        return self.username
+    def generate_verification_token(self):
+        return get_random_string(length=32)
 
+    def save(self, *args, **kwargs):
+        if not self.email_verification_token:
+            self.email_verification_token = self.generate_verification_token()
+        super().save(*args, **kwargs)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

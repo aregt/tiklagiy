@@ -4,9 +4,9 @@ from .models import CustomUser, UserProfile
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['email', 'username', 'phone_number', 'birth_date', 'is_staff']
+    list_display = ['email', 'username', 'is_staff', 'email_verified']
     fieldsets = UserAdmin.fieldsets + (
-        ('Extra Fields', {'fields': ('phone_number', 'birth_date', 'address', 'profile_picture')}),
+        ('Extra Fields', {'fields': ('email_verified', 'email_verification_token')}),
     )
 
 class UserProfileAdmin(admin.ModelAdmin):
