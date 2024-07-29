@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h2>Giriş Yap</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ login_form.as_p }}
-        <button class="btn btn-primary" type="submit">Giriş Yap</button>
-    </form>
-    <p class="text-center">Hesabınız yok mu? <a href="{% url 'register' %}">Kayıt Ol</a></p>
-</div>
+<h2>Giriş Yap</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Giriş Yap</button>
+</form>
+<p>
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Google ile Giriş Yap</a>
+</p>
+<p>
+    <a href="{% url 'social:begin' 'facebook' %}">Facebook ile Giriş Yap</a>
+</p>
+
+<p>
+    <a href="{% url 'password_reset' %}">Şifremi unuttum</a>
+</p>
 {% endblock %}
