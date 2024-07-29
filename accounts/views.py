@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
 from .models import CustomUser
+from .models import UserProfile
+
 
 def register(request):
     if request.method == 'POST':
@@ -15,6 +17,7 @@ def register(request):
             user = form.save(commit=False)
             user.is_active = False  # Kullanıcıyı deaktif olarak kaydet
             user.save()
+            UserProfile.objects.create(user=user)  # UserProfile oluştur
             send_verification_email(request, user)
             messages.success(request, f"Hoş geldiniz, {user.username}! Hesabınız oluşturuldu. Lütfen e-postanızı kontrol edin ve hesabınızı doğrulayın.")
             return redirect('login')
